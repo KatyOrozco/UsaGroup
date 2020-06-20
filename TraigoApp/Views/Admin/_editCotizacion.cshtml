@@ -1,0 +1,149 @@
+﻿@{
+    Layout = null;
+}
+<!--modal editar-->
+
+<div class="modal fade bd-example-modal-lg"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="modalEditarQ"
+     aria-hidden="true" id="modalEditarQ">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+                    <i class="font-icon-close-2"></i>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Editar Cotización</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">URL</label>
+                            <input type="text" class="form-control form-control-warning" id="campoUrlEdit">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Nombre del item</label>
+                            <input type="text" class="form-control form-control-warning" id="campoNombreitemEdit">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Precio</label>
+                            <input type="number" step="0.01" class="form-control form-control-warning" id="campoPrecioEdit">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Categoría</label>
+                            <select class="custom-select custom-select-sm" id="campoCategoriaEdit">
+                                <option selected disabled>Categoría</option>
+                                @foreach (var item in (IList<TraigoApp.Models.Category>)ViewData["categorias"])
+                                {
+                                    @Html.Raw("<option value='" + item.Id + "'>" + item.Nombre + "</option>")
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Tracking Number</label>
+                            <input type="text" class="form-control form-control-warning" id="campoTrackingEdit">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Peso en libras</label>
+                            <input type="number" step="0.01" class="form-control form-control-warning" id="campoPesoEdit">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Largo (opcional)</label>
+                            <input type="number" class="form-control form-control-warning" id="campoLargoEdit">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Ancho (opcional)</label>
+                            <input type="number" class="form-control form-control-warning" id="campoAnchoEdit">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Alto (opcional)</label>
+                            <input type="number" class="form-control form-control-warning" id="campoAltoEdit">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Estado</label>
+                            <select class="custom-select custom-select-sm" id="campoEstadoEdit">
+                                <option selected disabled>Estado</option>
+                                @foreach (var item in (IList<TraigoApp.Models.QuotationStatus>)ViewData["estadoCotizaciones"])
+                                {
+                                    @Html.Raw("<option value='" + item.Id + "'>" + item.Nombre + "</option>")
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Asignar viaje</label>
+                            <select class="custom-select custom-select-sm" id="campoViajeEdit">
+                                <option selected disabled>Viaje</option>
+                                @foreach (var item in (IList<TraigoApp.Models.Trip>)ViewData["viajesActivos"])
+                                {
+                                    @Html.Raw("<option value='" + item.Id + "'>" + item.User.Nombre + " / " + item.Vuelta.ToString("dd/MM/yyyy") + "</option>")
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-rounded btn-primary" id="guardarEdicion" idcotiza="">Guardar Edición</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--.modal editar-->
+
+<!--modal editar user-->
+<div class="modal fade bd-example-modal-lg"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="modalEditarUser"
+     aria-hidden="true" id="modalEditarUser">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+                    <i class="font-icon-close-2"></i>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Editar Usuario</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Nombre</label>
+                            <input type="text" class="form-control form-control-warning" id="nombreEditForm">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Cédula</label>
+                            <input type="text" class="form-control form-control-warning" id="cedulaEditForm">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Celular</label>
+                            <input type="text" class="form-control form-control-warning" id="celularecEditForm">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Ciudad</label>
+                            <select class="custom-select custom-select-sm" id="ciudadEditForm1">
+                                @*<option selected disabled>Ciudad</option>*@
+                                @foreach (var item in (IList<TraigoApp.Models.City>)ViewData["ciudades"])
+                                {
+                                    @Html.Raw("<option value='" + item.Id + "'>" + item.Nombre + "</option>")
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-rounded btn-primary" id="btnEditUser">Guardar edición</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--fin modal editar user-->

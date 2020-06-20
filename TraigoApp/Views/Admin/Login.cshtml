@@ -1,0 +1,70 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login USA Group</title>
+    @Styles.Render("~/Content/TraigoTemplate/files")
+</head>
+<body>
+    <div class="row" style="margin-top:50px;">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4 text-center">
+            <img src="~/Content/Img/Index/viaje3.png" width="50"/>
+            <form>
+                <div class="form-group">
+                    <label for="formGroupExampleInput">Usuario</label>
+                    <input type="text" class="form-control" id="campoUsuario" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput2">Contraseña</label>
+                    <input type="password" class="form-control" id="campoContrasenia" placeholder="Contraseña">
+                </div>
+                <div class="form-group">
+                    <a href="#" class="btn btn-success" id="btnIngresar">Ingresar</a>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-4">
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/traigojs")
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $("#btnIngresar").click(function () {
+            var email = $('#campoUsuario').val();
+            var clave = $('#campoContrasenia').val();
+            var usuarioRequest = {
+                Email: email,
+                Clave: clave
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/user/AuthAdmin',
+                dataType: 'json',
+                data: JSON.stringify(usuarioRequest),
+                contentType: 'application/json; charset=utf-8',
+                async: false,
+                success: function (data) {
+                    if (data.NewUser == true) {
+                        Cookies.set('adminTraigo', true);
+                        window.location.replace("/admin");
+                    } else {
+                        alert('No tiene permisos o su clave es incorrecta');
+                    }
+                },
+                error: function (xhr) {
+                    alert('No tiene permisos o su clave es incorrecta');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

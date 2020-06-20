@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Viajeros";
+    Layout = "~/Views/Shared/_LayoutUsuario.cshtml";
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row" id="datosCotizaciones">
+            <div class="col-lg-12" id="tablaCotizaciones">
+                <h3>Viajeros Disponibles</h3>
+
+                <table class='table table-bordered table-hover'>
+                    <thead>
+                        <tr>
+                            <th>Viajero</th>
+                            <th>Dirección</th>
+                            <th>Ciudad</th>
+                            <th>Estado</th>
+                            <th>Zip</th>
+                            <th>Teléfono</th>
+                            <th>Fecha de Ida</th>
+                            <th>Fecha de Vuelta</th>
+                            <th>Recibe Paquetes Desde</th>
+                            <th>Recibe Paquetes Hasta</th>
+                            <th>Notas Importantes</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in (IList<TraigoApp.Models.Trip>)ViewData["viajesActivos"])
+                        {
+                            @Html.Raw("<td title='Nombre'>" + item.User.Nombre + "</td>")
+                            @Html.Raw("<td title='Nombre'>" + item.UsAddress.Direccion + "</td>")
+                            @Html.Raw("<td title='Nombre'>" + item.UsAddress.Ciudad + "</td>")
+                            @Html.Raw("<td title='Nombre'>" + item.Status.Nombre + "</td>")
+                            @Html.Raw("<td title='Nombre'>" + item.UsAddress.Zipcode + "</td>")
+                            @Html.Raw("<td title='Nombre'>" + item.UsAddress.Telefono + "</td>")
+                            @Html.Raw("<td title='Fecha Ida'>" + item.Ida.ToString("dd/MM/yyyy") + "</td>")
+                            @Html.Raw("<td title='Fecha Vuelta'>" + item.Vuelta.ToString("dd/MM/yyyy") + "</td>")
+                            @Html.Raw("<td title='Paquetes Desde'>" + item.FechaDesde.ToString("dd/MM/yyyy") + "</td>")
+                            @Html.Raw("<td title='Paquetes Hasta'>" + item.FechaHasta.ToString("dd/MM/yyyy") + "</td>")
+                            @Html.Raw("<td title='Notas'>" + item.NotasImportantes + "</tr>")
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+

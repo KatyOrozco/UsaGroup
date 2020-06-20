@@ -1,0 +1,135 @@
+﻿@{
+    ViewBag.Title = "Buscar Usuarios";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-5">
+                <label class="form-label" for="inputSuccess1">Ingrese correo electrónico:</label>
+                <div class="form-group">
+                    <input type="email" class="form-control form-control-blue-fill" id="emailConsulta">
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-inline" id="enviarConsultaCotizacion" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Enviando...">Enviar</button>
+                </div>
+            </div>
+            <div class="col-lg-7" id="cuadroCliente">
+
+            </div>
+            <div class="col-lg-7" id="cuadroForm">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Nuevo usuario</h2>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Nombre</label>
+                            <input type="text" class="form-control form-control-warning" id="nombreForm">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Email</label>
+                            <input type="email" class="form-control form-control-warning" id="cedulaForm">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Cédula</label>
+                            <input type="text" class="form-control form-control-warning" id="emailForm">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Celular</label>
+                            <input type="text" class="form-control form-control-warning" id="celularecForm">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Ciudad</label>
+                            <select class="custom-select custom-select-sm" id="ciudadForm">
+                                @*<option selected disabled>Ciudad</option>*@
+                                @foreach (var item in (IList<TraigoApp.Models.City>)ViewData["ciudades"])
+                                {
+                                    @Html.Raw("<option value='" + item.Id + "'>" + item.Nombre + "</option>")
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group has-warning">
+                            <button type="button" class="btn btn-inline btn-success" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Creando..." id="crearUsuario">Crear Usuario</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--modal cotizacion-->
+
+
+
+
+<div class="modal fade"
+     id="modalTexto"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="modalTexto"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+                    <i class="font-icon-close-2"></i>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Resultado de la cotización</h4>
+            </div>
+            <div class="modal-body">
+                <textarea id="textoResultado" rows="4" class="form-control"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-rounded btn-primary" id="copiarTexto" data-clipboard-target="#textoResultado">Copiar texto</button>
+            </div>
+        </div>
+    </div>
+</div><!--.modal-->
+<!--modal grupos-->
+
+
+<div class="modal fade bd-example-modal-lg"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="modalTextoGrupo"
+     aria-hidden="true" id="modalTextoGrupo">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+                    <i class="font-icon-close-2"></i>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Texto para comprador</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <textarea class="form-control" rows="5" id="cajaTexto"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-rounded btn-primary" id="copiarTexto" data-clipboard-target="#cajaTexto">Copiar texto</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--finla modal grupos-->
+@Html.Action("_editCotizacion", "Admin")
+
+@section Scripts {
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@1/dist/clipboard.min.js"></script>
+    <script>
+        var clipboard = new Clipboard('.btn');
+        clipboard.on('success', function (e) {
+            console.log(e);
+        });
+        clipboard.on('error', function (e) {
+            console.log(e);
+        });
+    </script>
+}

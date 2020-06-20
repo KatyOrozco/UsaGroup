@@ -1,0 +1,148 @@
+﻿@model PagedList.IPagedList<TraigoApp.Models.Quotation>
+@using PagedList.Mvc
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Historial";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row" id="datosCotizaciones">
+            <div class="col-lg-12">
+                <h3>Historial de cotizaciones</h3>
+                <div class="row">
+                        @using (Html.BeginForm("Historial", "Admin", FormMethod.Get))
+                        {
+                            <p>
+                                <label>
+                                    Buscar por nombre:
+                                </label> 
+                                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                               <input type="submit" value="Buscar" class="btn btn-default" />
+                            </p>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12" id="tablaCotizaciones">
+               
+                <button class="btn btn-default" id="btnCalculo">Agrupar</button>
+                <table class='table table-bordered table-hover'>
+                    <thead>
+                        <tr>
+                            <th>Agrupar</th>
+                            <th>Item</th>
+                            <th>Usuario</th>
+                            <th>Email</th>
+                            <th>
+                                @Html.ActionLink("Estado", "Historial", new { sortOrder = ViewBag.EstadoSortParm, currentFilter = ViewBag.CurrentFilter })
+                            </th>
+                            <th>Peso</th>
+                            <th>Precio</th>
+                            <th>Com. TC</th>
+                            <th>Com. VJ</th>
+                            <th>
+                                @Html.ActionLink("Viaje", "Historial", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+                            </th>
+                            <th>Controles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @*@foreach (var item in Model)
+                        {
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        }*@
+
+
+                        @*@foreach (var item in (IList<TraigoApp.Models.Quotation>)ViewData["cotizaciones"])*@
+                           @foreach (var item in Model)
+                            {
+
+                            @Html.Raw("<tr idrow='"+item.Id+ "'><td><input type='checkbox' class='checkIn' valuePeso='" + item.Peso + "' nombreMuneco='"+item.User.Nombre+"' ")
+                            if (item.TripId != null)
+                            {
+                                @Html.Raw("fechaLlegada ='" + item.Trip.Vuelta.ToString("dd/MM/yyyy") + "'")
+                            }
+                            else
+                            {
+                                @Html.Raw("fechaLlegada ='(Fecha aún no asignada)'")
+                            }
+                            @Html.Raw("precio ='"+item.Precio+"' comTraigo='"+item.ComisionTraigoIva+"' comViajero='"+item.ComisionViajero+"' '></td>")
+                            @Html.Raw("<td><a href='" + item.Url + "' target='_blank' class='itemattr'>" + item.NombreItem +"</option></td>")
+                            @Html.Raw("<td>" + item.User.Nombre + "</td>")
+                            @Html.Raw("<td>" + item.User.Email + "</td>")
+                            @Html.Raw("<td idquotation='"+item.Id+ "' class='estadoattr'>" + item.QuotationStatus.Nombre + "</td>")
+                            @Html.Raw("<td title='Peso' class='pesoattr'>" + item.Peso + "</td>")
+                            @Html.Raw("<td title='Precio' class='precioattr'>" + item.Precio + "</td>")
+                            @Html.Raw("<td title='Comisión USA Group' class='comtraigoattr'>" + item.ComisionTraigoIva + "</td>")
+                            @Html.Raw("<td title='Comisión Viajero' idviaje='"+item.Id+ "' class='comviajeroattr'>" + item.ComisionViajero + "</td>")
+                            if (item.TripId != null)
+                            {
+                                @Html.Raw("<td title='Viaje' idviajeQuotation='" + item.Id + "' class='vueltaattr'>" + item.Trip.User.Nombre + " / " + item.Trip.Vuelta.ToString("dd/MM/yyyy") + "</td>")
+                            }
+                            else
+                            {
+                                @Html.Raw("<td title='Viaje' idviajeQuotation='" + item.Id + "' class='vueltaattr'>No asignado</td>")
+                            }
+                            @Html.Raw("<td><button class='btn btnEditar' idCotizacion='" + item.Id+ "'><i class='fas fa-pencil-alt'></i></button></td></tr>")
+                        }
+                    </tbody>
+                </table>
+            </div>
+     </div>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Historial",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>
+
+
+@Html.Action("_editCotizacion", "Admin")
+<!--modal grupos-->
+
+
+<div class="modal fade bd-example-modal-lg"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="modalTextoGrupo"
+     aria-hidden="true" id="modalTextoGrupo">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+                    <i class="font-icon-close-2"></i>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Texto para comprador</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <textarea class="form-control" rows="5" id="cajaTexto"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-rounded btn-primary" id="copiarTexto" data-clipboard-target="#cajaTexto">Copiar texto</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--finla modal grupos-->
+@section Scripts {
+    <script src="~/Scripts/TraigoJs/Admin/historial.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@1/dist/clipboard.min.js"></script>
+<script>
+    var clipboard = new Clipboard('.btn');
+    clipboard.on('success', function (e) {
+        console.log(e);
+    });
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
+</script>
+
+}
+

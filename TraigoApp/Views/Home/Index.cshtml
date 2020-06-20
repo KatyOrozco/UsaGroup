@@ -1,0 +1,128 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+    <title>USA GROUP</title>
+
+    <!-- Open Graph Tags -->
+    <meta property="og:description" content="TRAE tus compras de USA con VIAJEROS" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="">
+
+    <!-- Css -->
+    <link rel="stylesheet" href="~/Content/Index/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/Content/Index/style.css" />
+</head>
+<body data-spy="scroll" data-offset="60" data-target=".nav__holder">
+    <!-- Preloader -->
+    <div class="loader-mask">
+        <div class="loader">
+            "Cargando..."
+        </div>
+    </div>
+    <main class="main-wrapper">
+        <!-- Navigation -->
+        <header class="nav nav--sticky-on-mobile" id="home">
+            <div class="nav__holder" id="sticky-nav">
+                <div class="container">
+                    <div class="flex-parent">
+                        <div class="nav__header clearfix">
+                            <!-- Logo -->
+                            <div>
+                                <a href="#home" >
+                                    <img  src="~/Content/Img/Index/viajar_23-2148034719.jpg" width="50">
+                                </a>
+                            </div>
+                        </div> <!-- end nav-header -->
+                        <nav id="navbar-collapse" class="nav__wrap collapse navbar-collapse">
+                            <ul class="nav__menu nav__menu--inline local-scroll" id="onepage-nav">
+                                <li>
+                                    <a href="#features">Quiénes Somos</a>
+                                </li>
+                            </ul> <!-- end menu -->
+                            <div class="nav__btn-holder">
+                                <a class="btn btn--sm btn--color rounded" href="/user/login"><span>Cotiza Gratis</span></a>
+                                <a class="btn btn--sm btn--secondary-color" href="/admin"><span>Administrar</span></a>
+
+                            </div>
+                        </nav> <!-- end nav-wrap -->
+                    </div> <!-- end flex-parent -->
+                </div> <!-- end container -->
+            </div>
+        </header> <!-- end navigation -->
+        <div class="content-wrapper oh">
+            <section class="hero bg-gradient bg-gradient--1 white-text">
+                <div class="container hero__container hero__container--720">
+                    <div class="row hero__outer flex-vertical-align-center">
+                        <div class="col-lg-5 col-md-7 text-center hidden-sm hidden-xs">
+                            <img src="~/Content/Img/Index/viaje3.png" width="300">
+                        </div>
+                        <div class="col-lg-6 col-md-5">
+                            <h1 class="hero__title hero--boxed">TRAE tus compras de tiendas en EE.UU. con VIAJEROS</h1>
+                            <p class="hero__subtitle">Sólo ingresa el link del o los artículos de cualquier tienda WEB de EE.UU. que deseas comprar </p>
+                        </div>
+                    </div>
+                </div>
+            </section> <!-- end hero -->
+            <!-- Promo Section -->
+            <section class="section-wrap promo-section pt-200 pt-md-100" style="padding-bottom:50px!important;">
+                <div class="container" id="features">
+                    <div class="row flex-parent flex-vertical-align-center flex-sm-collapse">
+                        <div class="col-md-5 col-sm-12 mb-md-40">
+                            <div class="promo-section__description">
+                                <h2 class="promo-section__title">¿Quiénes Somos?</h2>
+                                <p class="lead mb-40">USA GROUP es una plataforma que conecta usuarios de tiendas en EE.UU. con viajeros, para que de este modo puedan obtener sus compras directamente en Ecuador de forma rápida y segura tanto para compradores como para viajeros.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-md-offset-1 col-sm-12">
+                            <img src="~/Content/Img/Index/viaje4.png" width="300">
+                        </div>
+                    </div>
+                </div>
+            </section> <!-- end promo section -->
+            <!--fin formulario-->
+            <footer class="footer">
+                <div class="container">
+                    <div class="footer__widgets">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="widget footer__about-us">
+                                    <h4>Síguenos</h4>                            
+                                    <div class="footer__socials mt-40">
+                                        <div class="social-icons social-icons--nobase">
+                                            <a href="https://www.facebook.com" target="_blank"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+                                            <a href="https://api.whatsapp.com/send?phone=59958778373" target="_blank"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+                                            <a href="https://www.instagram.com" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- end about us -->
+                            <div class="col-md-6">
+                                <div class="widget widget-links">
+                                    <h5 class="widget-title">Contáctanos</h5>
+                                    <p>Teléfonos: 02229855 / 099585554</p>
+                                    <p>Dirección: San Juan N3-56 y Marianitas</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- end container -->
+            </footer> <!-- end footer -->
+        </div> <!-- end content wrapper -->
+    </main> <!-- end main wrapper -->
+    <!-- jQuery Scripts -->
+    <script type="text/javascript" src="~/Scripts/Index/jquery.min.js"></script>
+    <!--<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>-->
+    <!--<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
+    <script type="text/javascript" src="~/Scripts/Index/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/Index/plugins.js"></script>
+    <script type="text/javascript" src="~/Scripts/Index/scripts.js"></script>
+    <script type="text/javascript">
+    </script>
+</body>
+</html>

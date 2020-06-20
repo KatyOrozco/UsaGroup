@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@Page.Title - Traigo Admin</title>
+    @RenderSection("head", required: false)
+    @Styles.Render("~/Content/TraigoTemplate/files")
+    @RenderSection("styles", required: false)
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+</head>
+<body class="with-side-menu control-panel control-panel-compact">
+    <div class="loader-mask">
+        <div class="loader">
+            "Cargando..."
+        </div>
+    </div>
+    <header class="site-header">
+        <div class="container-fluid">
+            <a href="#" class="site-logo">
+                <img class="hidden-md-down" src="~/Content/Img/Index/viaje3.png" alt="20">
+                <img class="hidden-lg-down" src="~/ContentImg/Index/viaje4.png" alt="20">
+            </a>
+            &nbsp;   &nbsp;
+            <button id="show-hide-sidebar-toggle" class="show-hide-sidebar">
+                <span>toggle menu</span>
+            </button>
+
+            <button class="hamburger hamburger--htla">
+                <span>toggle menu</span>
+            </button>
+            <div class="site-header-content">
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu-left-overlay"></div>
+    <nav class="side-menu">
+        <ul class="side-menu-list">
+            <li class="red">
+                <a href="/admin/users">
+                    <i class="fas fa-search"></i>
+                    <span class="lbl">Buscar Usuarios</span>
+                </a>
+            </li>
+            <li class="red">
+                <a href="/admin/viajero">
+                    <i class="fas fa-plane"></i>
+                    <span class="lbl">Ingresar Viajero</span>
+                </a>
+            </li>
+            <li class="red">
+                <a href="/admin/historial">
+                    <i class="fas fa-history"></i>
+                    <span class="lbl">Historial de Cotizaciones</span>
+                </a>
+            </li>
+            <li class="red">
+                <a href="/admin/viajesactivos">
+                    <i class="fas fa-suitcase"></i>
+                    <span class="lbl">Viajes activos</span>
+                </a>
+            </li>
+            <li class="red">
+                <a href="/admin/comandas">
+                    <i class="fas fa-suitcase"></i>
+                    <span class="lbl">Paquetes</span>
+                </a>
+            </li>
+            <li class="red">
+                <a href="/admin/login" class="logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span class="lbl">Cerrar sesión</span>
+                </a>
+            </li>
+        </ul>
+    </nav><!--.side-menu-->
+
+    @RenderBody()
+    <!--scripts generales de la plataforma-->
+    @Scripts.Render("~/bundles/traigojs")
+    <!--scripts específicos de admin-->
+    @Scripts.Render("~/bundles/traigojs/admin")
+    @*<script type="text/javascript" src="~/Scripts/TraigoJs/Admin/comun.js?3552"></script>
+        <script type="text/javascript" src="~/Scripts/TraigoJs/Admin/cotizacion.js"></script>*@
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

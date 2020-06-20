@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "Cotizar";
+    Layout = "~/Views/Shared/_LayoutUsuario.cshtml";
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+
+        <div class="row" id="cotizacionRow">
+            <div class="col-lg-12">
+                <div class="form-group has-warning">
+                    <button class="btn btn-inline btn-success" id="crearCotizacion"
+                            data-toggle="modal"
+                            data-target=".bd-example-modal-lg">
+                        Ingresar Nuevo Producto
+                    </button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--modal cotizacion-->
+
+
+<div class="modal fade bd-example-modal-lg"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="modalCotizacion"
+     aria-hidden="true" id="modalCotizacion">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+                    <i class="font-icon-close-2"></i>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Nueva Cotización<span id="correoModal"></span></h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">URL</label>
+                            <input type="text" class="form-control form-control-warning" id="campoUrl">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Nombre del item</label>
+                            <input type="text" class="form-control form-control-warning" id="campoNombreitem">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Precio</label>
+                            <input type="number" step="0.01" class="form-control form-control-warning" id="campoPrecio">
+                        </div>
+
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Categoría</label>
+                            <select class="custom-select custom-select-sm" id="campoCategoria">
+                                <option selected disabled>Categoría</option>
+                                @foreach (var item in (IList<TraigoApp.Models.Category>)ViewData["categorias"])
+                                {
+                                    @Html.Raw("<option value='" + item.Id + "'>" + item.Nombre + "</option>")
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Peso en libras</label>
+                            <input type="number" step="0.01" class="form-control form-control-warning" id="campoPeso">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Largo (opcional)</label>
+                            <input type="number" class="form-control form-control-warning" id="campoLargo">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Ancho (opcional)</label>
+                            <input type="number" class="form-control form-control-warning" id="campoAncho">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Alto (opcional)</label>
+                            <input type="number" class="form-control form-control-warning" id="campoAlto">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-rounded btn-primary" id="nuevaCotizacion">Guardar Cotización</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--.modal-->
+
+@Html.Action("_editCotizacion", "Admin")
+
+@section Scripts {
+    <script src="~/Scripts/TraigoJs/Admin/cotizacion.js?1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@1/dist/clipboard.min.js"></script>
+    <script>
+        var clipboard = new Clipboard('.btn');
+        clipboard.on('success', function (e) {
+            console.log(e);
+        });
+        clipboard.on('error', function (e) {
+            console.log(e);
+        });
+    </script>
+}

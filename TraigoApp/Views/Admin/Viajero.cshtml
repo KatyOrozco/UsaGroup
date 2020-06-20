@@ -1,0 +1,243 @@
+﻿
+@{
+    ViewBag.Title = "Viajero Admin";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section Styles{
+<link href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-5">
+                <label class="form-label" for="inputSuccess1">Ingrese la cédula:</label>
+                <div class="form-group">
+                    <input type="email" class="form-control form-control-blue-fill" id="emailConsulta">
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-inline" id="enviarConsulta" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Enviando...">Enviar</button>
+                </div>
+            </div>
+            <div class="col-lg-7" id="cuadroCliente">
+
+            </div>
+            <div class="col-lg-7" id="cuadroForm">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Nuevo usuario</h2>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Nombre</label>
+                            <input type="text" class="form-control form-control-warning" id="nombreForm">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Email</label>
+                            <input type="email" class="form-control form-control-warning" id="cedulaForm">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Cédula</label>
+                            <input type="text" class="form-control form-control-warning" id="emailForm">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Celular</label>
+                            <input type="number" class="form-control form-control-warning" id="celularecForm">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Ciudad</label>
+                            <select class="custom-select custom-select-sm" id="ciudadForm">
+                                <option selected>Ciudad</option>
+                                @foreach (var item in (IList<TraigoApp.Models.City>)ViewData["ciudades"])
+                                 {
+                                    @Html.Raw("<option value='" + item.Id + "'>" + item.Nombre + "</option>")
+                                 }
+                            </select>
+                        </div>
+                        <div class="form-group has-warning">
+                            <button type="button" class="btn btn-inline btn-success" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Creando..." id="crearUsuario">Crear Usuario</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" id="datosViajeroRow">
+            <div class="col-lg-12" id="viajesRow">
+                <h3>Viajes</h3>
+                <table class='table table-bordered table-hover'>
+                    <thead>
+                        <tr>
+                            <th>Ida</th>
+                            <th>Vuelta</th>
+                            <th>Desde</th>
+                            <th>Hasta</th>
+                            <th>Estado</th>
+                            <th>Reserva</th>
+                            <th>Aerolínea</th>
+                            <th>Notas</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaViaje"></tbody>
+                </table>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group has-warning">
+                    <button class="btn btn-inline btn-success" id="crearDireccion"
+                            data-toggle="modal"
+                            data-target="#modalDireccion">
+                        Nueva dirección
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-12" id="tablaDirecciones">
+                <h3>Direcciones</h3>
+                <table class='table table-bordered table-hover'>
+                    <thead>
+                        <tr>
+                            <th>Dirección</th>
+                            <th>Ciudad</th>
+                            <th>Estado</th>
+                            <th>Zipcode</th>
+                            <th>Nombre</th>
+                            <th>Teléfono</th>
+                            <th>Viaje</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaDireccion"></tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!--modal direccion-->
+<div class="modal fade bd-example-modal-lg"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="modalDireccion"
+     aria-hidden="true" id="modalDireccion">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+                    <i class="font-icon-close-2"></i>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Nueva Dirección para <span id="correoModal"></span></h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Dirección</label>
+                            <input type="text" class="form-control form-control-warning" id="campoDireccion">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Ciudad</label>
+                            <input type="text" class="form-control form-control-warning" id="campoCiudad">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Estado</label>
+                            <select class="custom-select custom-select-sm" id="campoEstado">
+                                <option selected>Estado</option>
+                                @foreach (var item in (IList<TraigoApp.Models.State>)ViewData["estados"])
+                                {
+                                    @Html.Raw("<option value='" + item.Id + "'>" + item.Nombre + "</option>")
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Zipcode</label>
+                            <input type="text" class="form-control form-control-warning" id="campoZipcode">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Nombre de persona que recibe</label>
+                            <input type="text" class="form-control form-control-warning" id="campoNombre">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Teléfono</label>
+                            <input type="number" class="form-control form-control-warning" id="campoTelefono">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-rounded btn-primary" id="creoDireccion">Crear Dirección</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--.modal-->
+
+
+<!--modal viaje-->
+<div class="modal fade bd-example-modal-lg"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="modalViaje"
+     aria-hidden="true" id="modalViaje">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+                    <i class="font-icon-close-2"></i>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Nuevo viaje para <span id="correoModalViaje"></span></h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Fecha Ida</label>
+                            <input class="form-control fecha" data-date-format="m/d/Y" id="fechaIda">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Fecha Vuelta</label>
+                            <input class="form-control fecha" data-date-format="m/d/Y" id="fechaVuelta">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Recibe paquetes desde</label>
+                            <input class="form-control fecha" data-date-format="m/d/Y" id="itemDesde">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Recibe paquetes hasta</label>
+                            <input class="form-control fecha" data-date-format="m/d/Y" id="itemHasta">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Código de reserva</label>
+                            <input type="text" class="form-control form-control-warning" id="itemReserva">
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Aerolinea</label>
+                            <select class="custom-select custom-select-sm" id="itemDireccion">
+                                <option selected>Aerolinea</option>
+                                @foreach (var item in (IList<TraigoApp.Models.Airline>)ViewData["aerolineas"])
+                                {
+                                    @Html.Raw("<option value='" + item.Id + "'>" + item.Nombre + "</option>")
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group has-warning">
+                            <label class="form-label" for="inputWarning1">Notas Importantes</label>
+                            <input type="text" class="form-control form-control-warning" id="itemNotas">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-rounded btn-primary" id="creoViaje" idDirBtnCrear="">Crear Viaje</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--.modal-->
+@Html.Action("_editCotizacion", "Admin")
+@section Scripts {
+    @*<script src="~/Scripts/TraigoJs/Admin/viajero.js"></script>*@
+    @*<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>*@
+}

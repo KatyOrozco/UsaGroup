@@ -1,0 +1,11 @@
+C:\Users\kates\Downloads\TraigoApp\TraigoApp\bin\ApplicationInsights.config
+C:\Users\kates\Downloads\TraigoApp\TraigoApp\bin\TraigoApp.dll.config
+C:\Users\kates\Downloads\TraigoApp\TraigoApp\bin\TraigoApp.dll
+C:\Users\kates\Downloads\TraigoApp\TraigoApp\bin\TraigoApp.pdb
+C:\Users\kates\Downloads\TraigoApp\TraigoApp\obj\Debug\TraigoApp.Migrations.init.resources
+C:\Users\kates\Downloads\TraigoApp\TraigoApp\obj\Debug\TraigoApp.csproj.GenerateResource.cache
+C:\Users\kates\Downloads\TraigoApp\TraigoApp\obj\Debug\TraigoApp.csproj.CoreCompileInputs.cache
+C:\Users\kates\Downloads\TraigoApp\TraigoApp\obj\Debug\TraigoApp.csproj.CopyComplete
+C:\Users\kates\Downloads\TraigoApp\TraigoApp\obj\Debug\TraigoApp.dll
+C:\Users\kates\Downloads\TraigoApp\TraigoApp\obj\Debug\TraigoApp.pdb
+C:\Users\kates\Downloads\TraigoApp\TraigoApp\obj\Debug\TraigoApp.csprojAssemblyReference.cache
